@@ -21,6 +21,9 @@ import DossiersIncompletsPage from './pages/DossiersIncompletsPage';
 import ModificationsAttentePage from './pages/ModificationsAttentePage';
 import NotesRecentesPage from './pages/NotesRecentesPage';
 import ElevesListPage from './pages/ElevesListPage';
+import EleveDetailPage from './pages/EleveDetailPage';
+import EleveDossierPage from './pages/EleveDossierPage';
+
 
 const router = createBrowserRouter([
   {
@@ -68,6 +71,14 @@ const router = createBrowserRouter([
       {
         path: 'eleves',
         element: <ElevesListPage />,
+      },
+      {
+        path: 'eleves/:id', // ':id' est un paramètre dynamique
+        element: <EleveDetailPage />,
+      },
+      {
+        path: 'eleves/:id/dossier/:annee',
+        element: <EleveDossierPage />,
       },
 
       // --- AUTRES ROUTES PRINCIPALES ---
