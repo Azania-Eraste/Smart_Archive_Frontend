@@ -3,8 +3,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import styles from './EleveDossierPage.module.css';
 import listStyles from './ListPage.module.css'; 
 // Importer les nouvelles icônes pour le tableau
-import { MdArrowBack, MdAdd, MdFilePresent, MdMoreVert } from 'react-icons/md';
+import { MdArrowBack, MdAdd, MdFilePresent, MdVisibility, MdGetApp, MdDelete, MdSwapHoriz } from 'react-icons/md';
 import ImportDocumentModal from '../components/common/ImportDocumentModal';
+import Toast from '../components/ui/Toast';
+import ConfirmModal from '../components/ui/ConfirmModal';
 
 // ... (Données factices inchangées) ...
 const documentsData = [
@@ -14,11 +16,24 @@ const documentsData = [
 ];
 
 const EleveDossierPage: React.FC = () => {
-  const { id, annee } = useParams<{ id: string; annee: string }>();
+  const { annee } = useParams<{ annee?: string }>();
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [docs, setDocs] = useState(documentsData);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [toDeleteId, setToDeleteId] = useState<string | null>(null);
+  const [replaceDocId, setReplaceDocId] = useState<string | null>(null);
 
-  const handleAddDocumentClick = () => setIsModalOpen(true);
+  const handleAddDocumentClick = () => {
+    setReplaceDocId(null);
+    setIsModalOpen(true);
+  };
+
+  const showToast = (msg: string) => {
+    setToastMessage(msg);
+    setTimeout(() => setToastMessage(null), 1400);
+  };
 
   // ... (Logique factice inchangée) ...
   const eleveName = "Lamine";
@@ -51,14 +66,27 @@ const EleveDossierPage: React.FC = () => {
       {/* MODIFICATION : Ajout d'une classe pour le cacher sur desktop */}
       <section className={styles.mobileListSection}>
         <div className={listStyles.listContainer}>
-          {documentsData.map((doc) => (
+          {docs.map((doc) => (
             <div key={doc.id} className={listStyles.item}>
               <div className={listStyles.avatar}>PDF</div>
               <div className={listStyles.info}>
                 <div className={listStyles.name}>{doc.name}</div>
                 <div className={listStyles.details}>Ajouté le {doc.date}</div>
               </div>
-              <span>&gt;</span>
+              <div className={listStyles.itemActions}>
+                <button className={listStyles.ghostButton} title="Voir" onClick={() => showToast('Aperçu non disponible (simulation)')}>
+                  <MdVisibility />
+                </button>
+                <button className={listStyles.ghostButton} title="Télécharger" onClick={() => showToast('Téléchargement simulé')}>
+                  <MdGetApp />
+                </button>
+                <button className={listStyles.ghostButton} title="Remplacer" onClick={() => { setReplaceDocId(doc.id); setIsModalOpen(true); }}>
+                  <MdSwapHoriz />
+                </button>
+                <button className={listStyles.ghostButtonDanger} title="Supprimer" onClick={() => { setToDeleteId(doc.id); setConfirmOpen(true); }}>
+                  <MdDelete />
+                </button>
+              </div>
             </div>
           ))}
         </div>
@@ -76,7 +104,7 @@ const EleveDossierPage: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {documentsData.map((doc) => (
+            {docs.map((doc) => (
               <tr key={doc.id} className={styles.tableRow}>
                 <td>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -87,9 +115,20 @@ const EleveDossierPage: React.FC = () => {
                 <td>{doc.type}</td>
                 <td>{doc.date}</td>
                 <td>
-                  <button style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.25rem' }}>
-                    <MdMoreVert />
-                  </button>
+                  <div className={listStyles.itemActions}>
+                    <button className={listStyles.ghostButton} title="Voir" onClick={() => showToast('Aperçu non disponible (simulation)')}>
+                      <MdVisibility />
+                    </button>
+                    <button className={listStyles.ghostButton} title="Télécharger" onClick={() => showToast('Téléchargement simulé')}>
+                      <MdGetApp />
+                    </button>
+                    <button className={listStyles.ghostButton} title="Remplacer" onClick={() => { setReplaceDocId(doc.id); setIsModalOpen(true); }}>
+                      <MdSwapHoriz />
+                    </button>
+                    <button className={listStyles.ghostButtonDanger} title="Supprimer" onClick={() => { setToDeleteId(doc.id); setConfirmOpen(true); }}>
+                      <MdDelete />
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
@@ -100,7 +139,34 @@ const EleveDossierPage: React.FC = () => {
       {/* Modal (inchangé) */}
       <ImportDocumentModal 
         isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        onClose={() => {
+          // Simulation: si replaceDocId est défini -> remplacer, sinon ajouter
+          setIsModalOpen(false);
+          if (replaceDocId) {
+            showToast('Document remplacé (simulation)');
+            setReplaceDocId(null);
+          } else {
+            // Ajouter un document simulé
+            const newDoc = { id: `doc-${Date.now()}`, name: 'Nouveau document', type: 'Autre', date: new Date().toLocaleDateString() };
+            setDocs((d) => [newDoc, ...d]);
+            showToast('Document ajouté (simulation)');
+          }
+        }}
+      />
+
+      {toastMessage && <Toast message={toastMessage} type="success" />}
+
+      <ConfirmModal
+        isOpen={confirmOpen}
+        title="Supprimer le document"
+        message={`Voulez-vous vraiment supprimer ce document ?`}
+        onConfirm={() => {
+          if (toDeleteId) setDocs((d) => d.filter((x) => x.id !== toDeleteId));
+          setConfirmOpen(false);
+          showToast('Document supprimé');
+          setToDeleteId(null);
+        }}
+        onCancel={() => setConfirmOpen(false)}
       />
     </div>
   );

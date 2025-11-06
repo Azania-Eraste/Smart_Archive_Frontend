@@ -12,7 +12,7 @@
 .title {
   font-size: 2.5rem;
   font-weight: bold;
-  color: #4f46e5; /* Violet principal */
+  color: var(--btn); /* Violet principal (thème) */
   margin: 0;
 }
 
@@ -49,7 +49,7 @@
   display: block;
   text-align: right;
   font-size: 0.85rem;
-  color: #4f46e5;
+  color: var(--btn);
   text-decoration: none;
   margin-top: -0.75rem; /* Remonte sous le champ mdp */
   margin-bottom: 1.5rem;
@@ -60,7 +60,7 @@
   padding: 0.85rem;
   border: none;
   border-radius: 8px;
-  background-color: #4f46e5;
+  background-color: var(--btn);
   color: white;
   font-weight: 600;
   font-size: 1rem;
@@ -69,7 +69,7 @@
 }
 
 .submitButton:hover {
-  background-color: #4338ca;
+  background-color: var(--btn-hover);
 }
 
 .divider {
@@ -106,6 +106,6 @@
   height: 50px;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
-  background-color: #f9fafb;
+  background-color: var(--primary);
   cursor: pointer;
 }

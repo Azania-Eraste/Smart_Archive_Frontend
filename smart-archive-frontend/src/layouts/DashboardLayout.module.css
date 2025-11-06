@@ -14,7 +14,7 @@
 .mainContent {
   flex: 1;
   padding: 1.5rem; /* Un peu moins de padding pour mobile */
-  background-color: #f9fafb;
+  background-color: var(--surface);
   overflow-y: auto;
   
   /* IMPORTANT : Ajoute un padding en bas sur mobile

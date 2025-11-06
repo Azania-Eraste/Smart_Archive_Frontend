@@ -8,7 +8,7 @@
 .pageHeader {
   font-size: 1.75rem;
   font-weight: 600;
-  color: #111827;
+  color: var(--text);
 }
 
 /* Grille pour les widgets d'alerte */
@@ -24,11 +24,11 @@
 
 /* Style d'un widget individuel (réutilisable) */
 .widgetCard {
-  background-color: white;
+  background-color: var(--surface);
   padding: 1.5rem;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  border-left: 5px solid #4f46e5; /* Bordure violette */
+  border-left: 5px solid var(--btn); /* Bordure theme */
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
 }
@@ -41,14 +41,14 @@
 .widgetTitle {
   font-size: 1rem;
   font-weight: 500;
-  color: #4b5563;
+  color: var(--muted);
   margin: 0 0 0.5rem 0;
 }
 
 .widgetValue {
   font-size: 2rem;
   font-weight: 700;
-  color: #111827;
+  color: var(--text);
   margin: 0;
 }
 
@@ -56,7 +56,7 @@
 .activityHeader {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #111827;
+  color: var(--text);
   margin-bottom: 1rem;
 }
 
@@ -70,7 +70,7 @@
 .activityItem {
   display: flex;
   align-items: center;
-  background-color: white;
+  background-color: var(--surface);
   padding: 1rem;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -80,8 +80,8 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: #e0e7ff; /* Fond violet clair */
-  color: #4f46e5; /* Violet */
+  background-color: var(--primary); /* Fond primary */
+  color: var(--btn); /* Violet */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -100,10 +100,10 @@
 
 .activityName {
   font-weight: 500;
-  color: #111827;
+  color: var(--text);
 }
 
 .activityDetails {
   font-size: 0.85rem;
-  color: #6b7280;
+  color: var(--muted);
 }

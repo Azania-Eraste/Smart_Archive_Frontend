@@ -15,7 +15,7 @@
   background: none;
   border: none;
   font-size: 1.75rem;
-  color: #374151;
+  color: var(--muted);
   cursor: pointer;
   padding: 0.5rem;
   border-radius: 50%;
@@ -23,13 +23,13 @@
 }
 
 .backButton:hover {
-  background-color: #f3f4f6;
+  background-color: var(--border);
 }
 
 .pageTitle {
   font-size: 1.75rem;
   font-weight: 600;
-  color: #111827;
+  color: var(--text);
 }
 
 /* Bouton "Ajouter un Document" */
@@ -42,8 +42,8 @@
   padding: 0.85rem;
   border: none;
   border-radius: 8px;
-  background-color: #4f46e5;
-  color: white;
+  background-color: var(--btn);
+  color: var(--surface);
   font-weight: 600;
   font-size: 1rem;
   cursor: pointer;
@@ -51,7 +51,7 @@
 }
 
 .addButton:hover {
-  background-color: #4338ca;
+  background-color: var(--btn-hover);
 }
 
 .addButtonIcon {
@@ -62,7 +62,7 @@
 .docHeader {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #111827;
+  color: var(--text);
   margin-top: 1rem;
 }
 
@@ -73,7 +73,7 @@
   display: none; /* CACHÉ sur mobile */
   margin-top: 1rem;
   width: 100%;
-  background-color: white;
+  background-color: var(--surface);
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   overflow: hidden;
@@ -88,29 +88,29 @@
 .table td {
   padding: 1rem;
   text-align: left;
-  border-bottom: 1px solid #f3f4f6;
+  border-bottom: 1px solid var(--border);
 }
 
 .table th {
-  background-color: #f9fafb;
-  color: #6b7280;
+  background-color: var(--surface);
+  color: var(--muted);
   font-size: 0.85rem;
   text-transform: uppercase;
 }
 
 .table td {
-  color: #374151;
+  color: var(--text);
 }
 
 .tableRow:hover {
-  background-color: #f9fafb;
+  background-color: var(--border);
   cursor: pointer;
 }
 
 /* Style pour l'icône de document */
 .docIcon {
   font-size: 1.5rem;
-  color: #4f46e5;
+  color: var(--btn);
 }
 
 /* --- MEDIA QUERY (Responsive) --- */

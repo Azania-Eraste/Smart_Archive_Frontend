@@ -9,12 +9,22 @@
   --bg: #FEF7FF;       /* couleur de fond demandée */
   --btn: #6750A4;      /* couleur bouton */
   --btn-hover: #5a3e94;/* couleur bouton au survol */
+  --btn-rgb: 103,80,164; /* pour utiliser rgba(var(--btn-rgb), 0.6) si besoin */
   --primary: #EADDFF;  /* primary */
   --secondary: #C4B4F1;/* secondary */
+  /* Variables sémantiques supplémentaires */
+  --text: #111827;     /* texte principal */
+  --muted: #6b7280;    /* texte secondaire / muted */
+  --border: #e5e7eb;   /* bordures et séparateurs */
+  --surface: #ffffff;  /* surface des cartes */
+  --danger: #dc2626;   /* danger/red */
+  --danger-border: #fecaca;
+  --dark: #1f2937;     /* dark surface (sidebar/bg) */
+  --on-dark: #e5e7eb;  /* text on dark */
 
   color-scheme: light dark;
   /* Couleurs par défaut (thème clair) — texte sombre sur fond clair */
-  color: #213547;
+  color: var(--text);
   background-color: var(--bg);
 
   font-synthesis: none;
@@ -33,9 +43,10 @@ body,
 
 /* Conteneur root centré pour le dashboard */
 #root {
-  max-width: none;
-  padding: 0;
-  background-color: #f3f4f6;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 0rem;
+  background-color: var(--bg);
   width: 100%;
   box-sizing: border-box;
 }
@@ -49,11 +60,11 @@ body,
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--btn);
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: var(--btn-hover);
 }
 
 body {
@@ -77,12 +88,12 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--btn);
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: var(--btn);
 }
 button:focus,
 button:focus-visible {
@@ -95,9 +106,9 @@ button:focus-visible {
     background-color: var(--bg);
   }
   a:hover {
-    color: #747bff;
+    color: var(--btn-hover);
   }
   button {
-    background-color: #f9f9f9;
+    background-color: var(--surface);
   }
 }
