@@ -13,6 +13,7 @@ import ForgotPasswordPage from './pages/ForgotPasswordPage';
 
 // Import de la page Dashboard (décommentez si le fichier existe)
 import DashboardEducateurPage from './pages/DashboardEducateurPage';
+import DashboardSecretairePage from './pages/DashboardSecretairePage';
 
 // --- IMPORTS POUR LES NOUVELLES PAGES ---
 // (Nous les créons juste après)
@@ -26,6 +27,7 @@ import EleveDetailPage from './pages/EleveDetailPage';
 import EleveDossierPage from './pages/EleveDossierPage';
 import InscriptionPage from './pages/InscriptionPage'; // <-- CET IMPORT MANQUAIT
 import HistoriquePage from './pages/HistoriquePage';
+import GestionMatieresPage from './pages/GestionMatieresPage';
 
 
 const router = createBrowserRouter([
@@ -45,12 +47,16 @@ const router = createBrowserRouter([
     element: <DashboardLayout />,
     children: [
       {
-        index: true, // Redirige /app vers /app/dashboard
-        element: <Navigate to="/app/dashboard" replace />,
+        index: true, // Redirige /app vers /app/dashboardEdu
+          element: <Navigate to="/app/dashboardEdu" replace />,
       },
       {
-        path: 'dashboard',
+        path: 'dashboardEdu',
         element: <DashboardEducateurPage />,
+      },
+      {
+        path: 'dashboardSec',
+        element: <DashboardSecretairePage />,
       },
 
       // --- AJOUT DES NOUVELLES ROUTES DU DASHBOARD ---
@@ -90,6 +96,10 @@ const router = createBrowserRouter([
       {
         path: 'historique',
         element: <HistoriquePage />,
+      },
+      {
+        path: 'matieres',
+        element: <GestionMatieresPage />,
       },
       
       // --- ROUTE D'INSCRIPTION (MANQUANTE) ---

@@ -1,0 +1,154 @@
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.pageHeader {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Conteneur principal (gère le responsive) */
+.contentLayout {
+  display: flex;
+  flex-direction: column; /* Mobile-first: empilé */
+  gap: 2rem;
+}
+
+/* --- Section Formulaire --- */
+.formContainer {
+  padding: 1.5rem;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  /* Prendra 1/3 de la largeur sur PC */
+  flex: 1;
+}
+
+.formTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+.inputGroup {
+  margin-bottom: 1rem;
+}
+
+.label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 0.85rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #4f46e5;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* --- Section Liste/Tableau --- */
+.listContainer {
+  /* Prendra 2/3 de la largeur sur PC */
+  flex: 2;
+}
+
+/* Liste Mobile (cachée sur PC) */
+.mobileList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.itemName {
+  font-weight: 500;
+}
+
+.itemActions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.iconButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.25rem;
+  color: #6b7280;
+}
+
+/* Tableau PC (caché sur Mobile) */
+.desktopTableContainer {
+  display: none; /* Caché par défaut */
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  overflow: hidden; /* Pour les coins arrondis */
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.table th {
+  background-color: #f9fafb;
+  color: #6b7280;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+/* --- MEDIA QUERY (Responsive) --- */
+@media (min-width: 1024px) {
+  .contentLayout {
+    flex-direction: row; /* PC: côte à côte */
+    align-items: flex-start; /* Aligne en haut */
+  }
+
+  /* Le formulaire reste "collé" en haut lors du scroll */
+  .formContainer {
+    position: sticky;
+    top: 2rem;
+  }
+
+  .mobileList {
+    display: none; /* Cache la liste mobile */
+  }
+
+  .desktopTableContainer {
+    display: block; /* Affiche le tableau PC */
+  }
+}

@@ -24,7 +24,7 @@ const navItems = [
     icon: (isActive: boolean) => isActive ? <MdGroup /> : <MdOutlineGroup /> 
   },
   { 
-    path: '/app/dashboard', 
+    path: '/app/dashboardEdu', 
     label: 'Dashboard', 
     icon: (isActive: boolean) => isActive ? <MdSpaceDashboard /> : <MdOutlineSpaceDashboard /> 
   },

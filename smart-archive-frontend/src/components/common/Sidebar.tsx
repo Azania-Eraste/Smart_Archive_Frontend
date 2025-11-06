@@ -1,58 +1,72 @@
 import React from 'react';
-// 1. Importer NavLink pour la navigation
 import { NavLink } from 'react-router-dom';
-
-// 2. Importer les styles du CSS Module
 import styles from './Sidebar.module.css';
 
-// 3. Importer les icônes (Material Design)
+// 1. Importer les icônes (y compris les nouvelles)
 import { 
   MdSpaceDashboard, 
   MdGroup, 
   MdPersonAdd, 
-  MdHistory 
+  MdHistory,
+  MdBook, // <-- Nouvelle icône pour "Matières"
+  MdSearch // <-- Nouvelle icône pour "Recherche"
 } from 'react-icons/md';
 
-// 4. Définir la structure de nos liens pour un code propre
-const navItems = [
-  { 
-    path: '/app/dashboard', 
-    label: 'Dashboard', 
-    icon: <MdSpaceDashboard /> 
-  },
-  { 
-    path: '/app/eleves', 
-    label: 'Élèves', 
-    icon: <MdGroup /> 
-  },
-  { 
-    path: '/app/inscription', 
-    label: 'Inscription', 
-    icon: <MdPersonAdd /> 
-  },
-  { 
-    path: '/app/historique', 
-    label: 'Historique', 
-    icon: <MdHistory /> 
-  },
+// 2. Importer notre nouveau hook
+import { useAuth } from '../../contexts/AuthContext';
+
+// 3. Définir les listes de liens pour chaque rôle
+type NavItem = {
+  path: string;
+  label: string;
+  icon: React.ReactNode;
+};
+const educateurNavItems: NavItem[] = [
+  { path: '/app/dashboardEdu', label: 'Dashboard', icon: <MdSpaceDashboard /> },
+  { path: '/app/inscription', label: '+ Inscription', icon: <MdPersonAdd /> },
+  { path: '/app/eleves', label: 'Élèves', icon: <MdGroup /> },
+  { path: '/app/historique', label: 'Historique', icon: <MdHistory /> },
 ];
 
+const secretaireNavItems: NavItem[] = [
+  { path: '/app/dashboardSec', label: 'Dashboard', icon: <MdSpaceDashboard /> },
+  { path: '/app/inscription', label: '+ Inscription', icon: <MdPersonAdd /> },
+  { path: '/app/matieres', label: 'Matières', icon: <MdBook /> },
+  { path: '/app/eleves', label: 'Recherche Élèves', icon: <MdSearch /> },
+];
+
+
 const Sidebar: React.FC = () => {
+  // 4. Lire le rôle depuis le contexte
+  const { role } = useAuth();
+
+  // 5. Choisir la bonne liste de liens
+  // (Note: J'ai renommé votre '/app/dashboardEdu' en '/app/dashboard'
+  // car nous allons utiliser une autre technique pour les dashboards)
+  let navItems: NavItem[] = [];
+  if (role === 'Educateur') {
+    navItems = educateurNavItems;
+  } else if (role === 'Secretaire') {
+    navItems = secretaireNavItems;
+  }
+  
+  // 6. Gérer le cas où personne n'est connecté
+  if (!role) {
+    return <aside className={styles.sidebar}>...</aside>; // Ne rien afficher
+  }
+
+  // 7. Le reste de votre composant est identique
   return (
     <aside className={styles.sidebar}>
       <div className={styles.sidebarHeader}>
         <h2>Smart Archive</h2>
+        <span style={{color: '#9ca3af', fontSize: '0.9rem'}}>{role}</span>
       </div>
 
       <nav className={styles.sidebarNav}>
         <ul>
-          {/* 5. Mapper sur nos liens pour les afficher */}
           {navItems.map((item) => (
             <li key={item.path}>
-              {/* 6. Utiliser NavLink au lieu de <a>
-                'className' reçoit une fonction qui nous dit si le lien est actif.
-                C'est ce qui active le style 'active' de notre CSS.
-              */}
               <NavLink
                 to={item.path}
                 className={({ isActive }: { isActive: boolean }) =>
