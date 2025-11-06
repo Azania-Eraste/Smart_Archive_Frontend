@@ -39,7 +39,9 @@ const EleveDossierPage: React.FC = () => {
         className={styles.addButton}
         onClick={handleAddDocumentClick}
       >
-        <MdAdd className={styles.addButtonIcon} />
+        <span className={styles.addButtonIcon}>
+          <MdAdd />
+        </span>
         Ajouter un Document
       </button>
 
