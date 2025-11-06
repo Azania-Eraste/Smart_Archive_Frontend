@@ -1,0 +1,43 @@
+/* Le conteneur principal */
+.bottomNav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px; /* Hauteur standard pour une bottom nav */
+  background-color: white;
+  display: flex;
+  justify-content: space-around; /* Distribue les icônes équitablement */
+  align-items: center;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08); /* Ombre en haut */
+  z-index: 1000;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+
+/* Style pour chaque lien */
+.navLink {
+  display: flex;
+  flex-direction: column; /* Icône en haut, texte en bas */
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  text-decoration: none;
+  color: #6b7280; /* Gris par défaut */
+  font-size: 0.75rem; /* Petit texte */
+  padding: 4px 0;
+  height: 100%;
+}
+
+/* Style pour l'icône */
+.icon {
+  font-size: 1.5rem; /* Taille de l'icône */
+  margin-bottom: 2px;
+}
+
+/* Style du lien ACTIF */
+/* NavLink ajoutera cette classe pour nous */
+.active {
+  color: #4f46e5; /* Le violet principal */
+  font-weight: 500;
+}

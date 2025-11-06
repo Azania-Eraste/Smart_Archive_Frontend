@@ -1,0 +1,68 @@
+/* Style pour la page principale */
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* Espace entre les sections */
+}
+
+.pageHeader {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* La liste des inscriptions */
+.listContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* --- RÉUTILISATION DES STYLES --- */
+/* Nous allons réutiliser les styles de 'DashboardEducateurPage.module.css'
+   pour les items de la liste. Mais pour cette page, créons
+   un style d'item dédié pour plus de clarté.
+*/
+.item {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  padding: 1.25rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.07);
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #e0e7ff; /* Fond violet clair */
+  color: #4f46e5; /* Violet */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  margin-right: 1rem;
+  flex-shrink: 0; /* Empêche l'avatar de rétrécir */
+}
+
+.info {
+  flex-grow: 1;
+}
+
+.name {
+  font-weight: 600;
+  color: #111827;
+}
+
+.details {
+  font-size: 0.9rem;
+  color: #6b7280;
+}

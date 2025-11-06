@@ -1,0 +1,107 @@
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.pageHeader {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Barre de recherche */
+.searchBar {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+/* Conteneur pour les onglets de classe */
+.tabsContainer {
+  display: flex;
+  overflow-x: auto; /* Permet de scroller les onglets sur mobile */
+  gap: 0.75rem;
+  padding-bottom: 4px; /* Espace pour l'ombre */
+
+  /* Cache la barre de scroll */
+  -ms-overflow-style: none;  /* IE et Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.tabsContainer::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+/* Style d'un onglet */
+.tab {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 20px; /* Onglets en pilule */
+  background-color: #f3f4f6; /* Gris clair */
+  color: #4b5563;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap; /* Empêche le saut à la ligne */
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.tab:hover {
+  background-color: #e5e7eb;
+}
+
+/* Onglet actif */
+.tabActive {
+  background-color: #4f46e5; /* Violet */
+  color: white;
+}
+
+/* Conteneur de la liste (on réutilise les styles de ListPage.module.css) */
+/* Si vous préférez, vous pouvez importer ListPage.module.css
+   et utiliser ses classes 'listContainer' et 'item'
+   pour éviter la duplication de code.
+*/
+.listContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  padding: 1.25rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #e0e7ff;
+  color: #4f46e5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  margin-right: 1rem;
+}
+
+.info {
+  flex-grow: 1;
+}
+
+.name {
+  font-weight: 600;
+  color: #111827;
+}
+
+.details {
+  font-size: 0.9rem;
+  color: #6b7280;
+}

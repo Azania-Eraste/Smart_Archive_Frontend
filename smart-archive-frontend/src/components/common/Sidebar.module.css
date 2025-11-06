@@ -1,0 +1,66 @@
+/* Le conteneur principal de la sidebar */
+.sidebar {
+  width: 250px;
+  background-color: #1f2937; /* Fond sombre (repris du layout) */
+  color: #e5e7eb; /* Texte gris clair */
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Prend toute la hauteur */
+}
+
+/* En-tête avec le logo/titre */
+.sidebarHeader {
+  padding: 1.5rem 1rem;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  border-bottom: 1px solid #374151; /* Ligne de séparation */
+}
+
+/* La liste de navigation */
+.sidebarNav {
+  flex-grow: 1; /* Pousse la nav à prendre l'espace */
+  padding-top: 1rem;
+}
+
+.sidebarNav ul {
+  list-style: none;
+  padding: 0 0.75rem;
+  margin: 0;
+}
+
+/* Style de chaque lien */
+.navLink {
+  display: flex;
+  align-items: center;
+  padding: 0.85rem 1rem;
+  margin-bottom: 0.25rem;
+  border-radius: 8px;
+  color: #d1d5db; /* Texte normal */
+  text-decoration: none;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.navLink:hover {
+  background-color: #374151; /* Fond au survol */
+  color: white;
+}
+
+/* C'EST LA PARTIE IMPORTANTE : le style du lien ACTIF */
+/* 'react-router-dom' ajoutera cette classe pour nous */
+.active {
+  background-color: #4f46e5; /* Le violet de vos maquettes */
+  color: white;
+  font-weight: 500;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Style pour l'icône */
+.icon {
+  margin-right: 0.75rem;
+  font-size: 1.25rem;
+  /* Aligne l'icône verticalement */
+  display: inline-flex;
+  align-items: center;
+}

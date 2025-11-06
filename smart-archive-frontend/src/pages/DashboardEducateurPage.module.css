@@ -1,0 +1,109 @@
+/* Style pour la page principale */
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem; /* Espace entre les sections */
+}
+
+.pageHeader {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Grille pour les widgets d'alerte */
+.widgetGrid {
+  display: grid;
+  /* 'auto-fit' crée un layout responsive : 
+     il met autant de colonnes que possible qui font au moins 200px.
+     Sur mobile: 1 colonne. Sur desktop: 2, 3 ou 4 colonnes.
+  */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Style d'un widget individuel (réutilisable) */
+.widgetCard {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-left: 5px solid #4f46e5; /* Bordure violette */
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.widgetCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+}
+
+.widgetTitle {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #4b5563;
+  margin: 0 0 0.5rem 0;
+}
+
+.widgetValue {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+/* Section de l'historique */
+.activityHeader {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 1rem;
+}
+
+.activityList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Style pour un item de l'historique (réutilisable) */
+.activityItem {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.activityAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #e0e7ff; /* Fond violet clair */
+  color: #4f46e5; /* Violet */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  margin-right: 1rem;
+}
+
+.widgetLink {
+  text-decoration: none; /* Supprime le soulignement bleu */
+  color: inherit; /* Fait hériter la couleur du texte parent */
+}
+
+.activityInfo {
+  flex-grow: 1;
+}
+
+.activityName {
+  font-weight: 500;
+  color: #111827;
+}
+
+.activityDetails {
+  font-size: 0.85rem;
+  color: #6b7280;
+}

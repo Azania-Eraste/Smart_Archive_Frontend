@@ -1,0 +1,43 @@
+/* Le conteneur principal */
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Zone de contenu principale */
+.mainContent {
+  flex: 1;
+  padding: 1.5rem; /* Un peu moins de padding pour mobile */
+  background-color: #f9fafb;
+  overflow-y: auto;
+  
+  /* IMPORTANT : Ajoute un padding en bas sur mobile
+     pour que la BottomNav ne cache pas le contenu */
+  padding-bottom: 80px; /* 60px (nav) + 20px (espace) */
+}
+
+/* Logique d'affichage responsive */
+.sidebar {
+  display: none; /* Cachée par défaut (mobile-first) */
+}
+.bottomNav {
+  display: block; /* Visible par défaut (mobile-first) */
+}
+
+
+/* ----- MEDIA QUERY POUR ORDINATEUR ----- */
+@media (min-width: 768px) {
+  /* Sur les écrans larges (plus de 768px)... */
+  
+  .sidebar {
+    display: block; /* On AFFICHE la Sidebar */
+  }
+  .bottomNav {
+    display: none; /* On CACHE la BottomNav */
+  }
+
+  .mainContent {
+    padding: 2rem; /* Retour au padding normal */
+    padding-bottom: 2rem; /* Plus besoin du padding de sécurité */
+  }
+}
