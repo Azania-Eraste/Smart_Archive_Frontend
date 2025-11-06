@@ -1,0 +1,101 @@
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.pageHeader {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* --- VUE LISTE (MOBILE) --- */
+.mobileList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  padding: 1.25rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #e0e7ff;
+  color: #4f46e5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  margin-right: 1rem;
+  font-size: 1.25rem;
+}
+
+.info {
+  flex-grow: 1;
+}
+
+.name {
+  font-weight: 600;
+  color: #111827;
+}
+
+.details {
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+/* --- VUE TABLEAU (DESKTOP) --- */
+.desktopTableContainer {
+  display: none; /* Caché par défaut */
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.table th {
+  background-color: #f9fafb;
+  color: #6b7280;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+.tableRow:hover {
+  background-color: #f9fafb;
+  cursor: pointer;
+}
+
+/* --- MEDIA QUERY (Responsive) --- */
+@media (min-width: 1024px) {
+  .mobileList {
+    display: none; /* Cache la liste mobile */
+  }
+  .desktopTableContainer {
+    display: block; /* Affiche le tableau PC */
+  }
+}

@@ -7,7 +7,7 @@
 .pageHeader {
   font-size: 1.75rem;
   font-weight: 600;
-  color: #111827;
+  color: var(--text);
 }
 
 /* Conteneur principal (gère le responsive) */
@@ -20,7 +20,7 @@
 /* --- Section Formulaire --- */
 .formContainer {
   padding: 1.5rem;
-  background-color: white;
+  background-color: var(--surface);
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   /* Prendra 1/3 de la largeur sur PC */
@@ -47,7 +47,7 @@
 .input {
   width: 100%;
   padding: 0.75rem 1rem;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--border);
   border-radius: 8px;
   box-sizing: border-box;
 }
@@ -57,8 +57,8 @@
   padding: 0.85rem;
   border: none;
   border-radius: 8px;
-  background-color: #4f46e5;
-  color: white;
+  background-color: var(--btn);
+  color: var(--surface);
   font-weight: 600;
   cursor: pointer;
 }
@@ -80,7 +80,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: white;
+  background-color: var(--surface);
   padding: 1rem;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -100,13 +100,13 @@
   border: none;
   cursor: pointer;
   font-size: 1.25rem;
-  color: #6b7280;
+  color: var(--muted);
 }
 
 /* Tableau PC (caché sur Mobile) */
 .desktopTableContainer {
   display: none; /* Caché par défaut */
-  background-color: white;
+  background-color: var(--surface);
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   overflow: hidden; /* Pour les coins arrondis */
@@ -121,12 +121,12 @@
 .table td {
   padding: 1rem;
   text-align: left;
-  border-bottom: 1px solid #f3f4f6;
+  border-bottom: 1px solid var(--border);
 }
 
 .table th {
-  background-color: #f9fafb;
-  color: #6b7280;
+  background-color: var(--surface);
+  color: var(--muted);
   font-size: 0.85rem;
   text-transform: uppercase;
 }

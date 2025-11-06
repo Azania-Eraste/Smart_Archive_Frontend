@@ -1,41 +1,38 @@
 import React, { createContext, useContext, useState, type ReactNode } from 'react';
 
-// 1. Définir les rôles possibles dans notre système
-type UserRole = 'Educateur' | 'Secretaire' | 'Admin'; // (Ajoutez d'autres rôles au besoin)
+// 1. Ajouter 'Professeur' aux rôles
+type UserRole = 'Educateur' | 'Secretaire' | 'Professeur' | 'Admin'; 
 
-// 2. Définir ce que le contexte va stocker
 type AuthContextType = {
   role: UserRole | null;
-  // Fonctions factices pour simuler la connexion
   loginAsEducateur: () => void;
   loginAsSecretaire: () => void;
+  loginAsProfesseur: () => void; // <-- 2. Ajouter la fonction
   logout: () => void;
 };
 
-// 3. Créer le contexte
 const AuthContext = createContext<AuthContextType | null>(null);
 
-// 4. Créer le "Provider" (le composant qui fournit les données)
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  // Pour l'instant, nous codons en dur le rôle pour tester.
-  // Normalement, ceci viendrait d'un appel API après le login.
-  const [currentRole, setCurrentRole] = useState<UserRole | null>('Educateur'); // <-- CHANGEZ ICI POUR TESTER
+  // 3. Mettre 'Professeur' ici pour tester ce nouveau rôle
+  const [currentRole, setCurrentRole] = useState<UserRole | null>('Professeur'); 
 
   const loginAsEducateur = () => setCurrentRole('Educateur');
   const loginAsSecretaire = () => setCurrentRole('Secretaire');
+  const loginAsProfesseur = () => setCurrentRole('Professeur'); // <-- 4. Ajouter la fonction
   const logout = () => setCurrentRole(null);
 
   const value = {
     role: currentRole,
     loginAsEducateur,
     loginAsSecretaire,
+    loginAsProfesseur, // <-- 5. Exposer la fonction
     logout,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
-// 5. Créer un hook personnalisé pour accéder facilement au contexte
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {

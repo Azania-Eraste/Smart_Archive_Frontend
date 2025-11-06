@@ -1,26 +1,25 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './Sidebar.module.css';
-
-// 1. Importer les icônes (y compris les nouvelles)
 import { 
   MdSpaceDashboard, 
   MdGroup, 
   MdPersonAdd, 
   MdHistory,
-  MdBook, // <-- Nouvelle icône pour "Matières"
-  MdSearch // <-- Nouvelle icône pour "Recherche"
+  MdBook, 
+  MdSearch,
+  MdSettings // <-- Icône pour Paramètres (exemple)
 } from 'react-icons/md';
-
-// 2. Importer notre nouveau hook
 import { useAuth } from '../../contexts/AuthContext';
 
-// 3. Définir les listes de liens pour chaque rôle
+// Type pour les items de navigation
 type NavItem = {
   path: string;
   label: string;
   icon: React.ReactNode;
 };
+
+// 1. Définir les liens pour le Professeur
 const educateurNavItems: NavItem[] = [
   { path: '/app/dashboardEdu', label: 'Dashboard', icon: <MdSpaceDashboard /> },
   { path: '/app/inscription', label: '+ Inscription', icon: <MdPersonAdd /> },
@@ -35,34 +34,35 @@ const secretaireNavItems: NavItem[] = [
   { path: '/app/eleves', label: 'Recherche Élèves', icon: <MdSearch /> },
 ];
 
+const professeurNavItems: NavItem[] = [
+  { path: '/app/dashboard', label: 'Mes Cours', icon: <MdSpaceDashboard /> },
+  { path: '/app/settings', label: 'Paramètres', icon: <MdSettings /> },
+];
 
 const Sidebar: React.FC = () => {
-  // 4. Lire le rôle depuis le contexte
   const { role } = useAuth();
 
-  // 5. Choisir la bonne liste de liens
-  // (Note: J'ai renommé votre '/app/dashboardEdu' en '/app/dashboard'
-  // car nous allons utiliser une autre technique pour les dashboards)
+  // 2. Ajouter la nouvelle logique
   let navItems: NavItem[] = [];
   if (role === 'Educateur') {
     navItems = educateurNavItems;
   } else if (role === 'Secretaire') {
     navItems = secretaireNavItems;
-  }
-  
-  // 6. Gérer le cas où personne n'est connecté
-  if (!role) {
-    return <aside className={styles.sidebar}>...</aside>; // Ne rien afficher
+  } else if (role === 'Professeur') { // <-- 3. Ajouter la condition
+    navItems = professeurNavItems;
   }
 
-  // 7. Le reste de votre composant est identique
+  if (!role) {
+    return <aside className={styles.sidebar}>...</aside>; 
+  }
+
+  // ... (le reste du JSX est inchangé)
   return (
     <aside className={styles.sidebar}>
       <div className={styles.sidebarHeader}>
         <h2>Smart Archive</h2>
         <span style={{color: '#9ca3af', fontSize: '0.9rem'}}>{role}</span>
       </div>
-
       <nav className={styles.sidebarNav}>
         <ul>
           {navItems.map((item) => (
