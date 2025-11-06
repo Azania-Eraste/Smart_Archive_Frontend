@@ -1,19 +1,15 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 
-/**
- * Ce composant 'Outlet' est la partie magique de react-router-dom.
- * C'est ici que votre <LoginPage> ou <ForgotPasswordPage> 
- * sera automatiquement affichée.
- */
+// Ce 'Outlet' est l'endroit où LoginPage sera affiché.
+// S'il manque, rien ne s'affiche.
 
-// Styles CSS pour centrer le contenu
 const layoutStyle: React.CSSProperties = {
   minHeight: '100vh',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  backgroundColor: '#f3f4f6', // Un fond gris clair
+  backgroundColor: '#f3f4f6', 
 };
 
 const contentStyle: React.CSSProperties = {
@@ -22,14 +18,14 @@ const contentStyle: React.CSSProperties = {
   boxShadow: '0 4px 12px rgba(0, 0, 0, 0.05)',
   borderRadius: '8px',
   width: '100%',
-  maxWidth: '420px', // Limite la largeur du formulaire
+  maxWidth: '420px',
 };
 
 const AuthLayout: React.FC = () => {
   return (
     <div style={layoutStyle}>
       <div style={contentStyle}>
-        {/* Le Outlet rendra la page enfant (ex: LoginPage) */}
+        {/* Le Outlet rendra la page enfant (LoginPage) */}
         <Outlet />
       </div>
     </div>

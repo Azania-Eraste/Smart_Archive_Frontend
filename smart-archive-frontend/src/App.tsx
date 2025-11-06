@@ -24,6 +24,8 @@ import ElevesListPage from './pages/ElevesListPage';
 import EleveDetailPage from './pages/EleveDetailPage';
 import EleveDossierPage from './pages/EleveDossierPage';
 import InscriptionPage from './pages/InscriptionPage'; // <-- CET IMPORT MANQUAIT
+import HistoriquePage from './pages/HistoriquePage';
+
 
 const router = createBrowserRouter([
   {
@@ -78,6 +80,11 @@ const router = createBrowserRouter([
       {
         path: 'eleves/:id/dossier/:annee',
         element: <EleveDossierPage />,
+      },
+
+      {
+        path: 'historique',
+        element: <HistoriquePage />,
       },
       
       // --- ROUTE D'INSCRIPTION (MANQUANTE) ---
