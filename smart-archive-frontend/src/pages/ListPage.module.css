@@ -66,3 +66,62 @@
   font-size: 0.9rem;
   color: #6b7280;
 }
+
+/* Actions pour chaque item (bouton 'Compléter') */
+.actions {
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
+}
+
+.actionButton {
+  background-color: #2563eb;
+  color: #fff;
+  border: none;
+  padding: 0.45rem 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.actionButton:hover {
+  background-color: #1e40af;
+}
+
+/* Styles pour InscriptionsAttentePage */
+.actionBar {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.select {
+  padding: 0.45rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+  background: white;
+}
+
+.applyButton {
+  background-color: #16a34a;
+  color: #fff;
+  border: none;
+  padding: 0.45rem 0.9rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.applyButton:hover {
+  background-color: #15803d;
+}
+
+.radioWrap {
+  margin-right: 0.75rem;
+}
+
+.radio {
+  width: 18px;
+  height: 18px;
+}

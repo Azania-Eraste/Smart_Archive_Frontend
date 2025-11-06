@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './LoginPage.module.css';
 
 const LoginPage: React.FC = () => {
@@ -7,14 +7,17 @@ const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const navigate = useNavigate();
+
   // Gérer la soumission du formulaire
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     // C'est ici que vous appellerez votre API backend (Python)
     console.log('Tentative de connexion avec:', { email, password });
-    
-    // TODO: Implémenter la logique d'authentification
-    // (ex: appel API, gestion des erreurs, redirection vers /app/dashboard)
+
+    // TODO: Implémenter la logique d'authentification réelle (appel API, gestion des erreurs)
+    // Pour l'instant, on redirige vers /app après le submit
+    navigate('/app');
   };
 
   return (

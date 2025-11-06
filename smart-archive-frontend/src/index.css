@@ -3,15 +3,41 @@
   line-height: 1.5;
   font-weight: 400;
 
+  width: 100%;
+
   color-scheme: light dark;
-  /* Couleurs par défaut (thème clair) — texte sombre sur fond clair */
+  /* Couleurs par défaut (thème clair) — texte sombre sur fond clair (même que AuthLayout) */
   color: #213547;
-  background-color: #ffffff;
+  background-color: #f3f4f6; /* même couleur que .layout dans AuthLayout.module.css */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Assurer que la racine occupe toute la hauteur de la fenêtre
+   pour que les layouts utilisant 100% de hauteur fonctionnent correctement */
+html,
+body,
+#root {
+  height: 100%;
+}
+
+/* Conteneur root centré pour le dashboard */
+#root {
+  max-width: none;
+  padding: 0;
+  background-color: #f3f4f6;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Sur petits écrans, réduire le padding pour gagner de l'espace */
+@media (max-width: 420px) {
+  #root {
+    padding: 1rem;
+  }
 }
 
 a {
@@ -29,6 +55,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: #f3f4f6; /* s'assurer que le root et le body aient la même couleur */
 }
 
 h1 {
@@ -58,7 +85,7 @@ button:focus-visible {
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #ffffff;
+    background-color: #f3f4f6;
   }
   a:hover {
     color: #747bff;

@@ -1,0 +1,35 @@
+/* Styles responsives pour centrer le contenu des pages d'authentification */
+.layout {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f3f4f6;
+  padding: 1rem; /* espace autour sur petits écrans */
+}
+
+.content {
+  padding: 2rem;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  width: 100%;
+  max-width: 420px; /* largeur maximale sur grand écran */
+  box-sizing: border-box;
+}
+
+/* Sur très petits écrans on réduit le padding et les coins pour mieux occuper l'espace */
+@media (max-width: 420px) {
+  .content {
+    padding: 1rem;
+    border-radius: 6px;
+    max-width: 100%;
+  }
+}
+
+/* Sur écrans très larges on peut augmenter la largeur max si souhaité */
+@media (min-width: 992px) {
+  .content {
+    max-width: 560px;
+  }
+}
