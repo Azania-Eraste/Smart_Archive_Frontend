@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  padding-bottom: 80px;
+  padding-bottom: 80px; /* Espace pour la BottomNav */
 }
 
 .pageHeader {
@@ -46,7 +46,7 @@
   background-color: white;
 }
 
-/* --- NOUVEAUX STYLES --- */
+/* --- STYLES AJOUTÉS/MODIFIÉS --- */
 
 /* Zone d'upload pour les documents */
 .uploadArea {
@@ -102,7 +102,7 @@
   cursor: pointer;
 }
 
-/* Bouton photo (inchangé) */
+/* Bouton photo */
 .iconButton {
   display: flex;
   align-items: center;
@@ -120,4 +120,55 @@
 
 .icon {
   font-size: 1.25rem;
+}
+
+/* --- STYLES RESPONSIVE --- */
+
+/* Ce conteneur va gérer la grille de chaque étape */
+.formStep {
+  /* Sur mobile, reste en colonne simple */
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Classe utilitaire pour forcer un élément à prendre
+   toute la largeur dans la grille desktop */
+.fullWidth {
+  grid-column: 1 / -1; /* S'étend sur toutes les colonnes */
+}
+
+
+/* --- MEDIA QUERY (La magie responsive) --- */
+
+@media (min-width: 1024px) {
+  /* Sur les ordinateurs... */
+  
+  .formStep {
+    /* On passe en GRILLE à 2 colonnes */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+
+  .pageHeader, .formTitle {
+    /* On centre les titres sur desktop */
+    text-align: center;
+  }
+
+  /* Le bouton "Prendre une photo" prend toute la largeur */
+  .iconButton {
+    grid-column: 1 / -1;
+  }
+
+  /* La zone d'upload prend toute la largeur */
+  .uploadArea {
+    grid-column: 1 / -1;
+  }
+  
+  /* Les boutons de navigation prennent toute la largeur */
+  .navigationButtons {
+    grid-column: 1 / -1;
+  }
 }
