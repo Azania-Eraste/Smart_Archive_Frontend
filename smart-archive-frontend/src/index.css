@@ -5,10 +5,17 @@
 
   width: 100%;
 
+  /* Thème couleurs (modifiable depuis ici) */
+  --bg: #FEF7FF;       /* couleur de fond demandée */
+  --btn: #6750A4;      /* couleur bouton */
+  --btn-hover: #5a3e94;/* couleur bouton au survol */
+  --primary: #EADDFF;  /* primary */
+  --secondary: #C4B4F1;/* secondary */
+
   color-scheme: light dark;
-  /* Couleurs par défaut (thème clair) — texte sombre sur fond clair (même que AuthLayout) */
+  /* Couleurs par défaut (thème clair) — texte sombre sur fond clair */
   color: #213547;
-  background-color: #f3f4f6; /* même couleur que .layout dans AuthLayout.module.css */
+  background-color: var(--bg);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -55,7 +62,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #f3f4f6; /* s'assurer que le root et le body aient la même couleur */
+  background-color: var(--bg); /* s'assurer que le root et le body aient la même couleur */
 }
 
 h1 {
@@ -85,7 +92,7 @@ button:focus-visible {
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #f3f4f6;
+    background-color: var(--bg);
   }
   a:hover {
     color: #747bff;

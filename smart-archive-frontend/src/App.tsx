@@ -19,6 +19,7 @@ import DashboardEducateurPage from './pages/DashboardEducateurPage';
 import InscriptionsAttentePage from './pages/InscriptionsAttentePage';
 import DossiersIncompletsPage from './pages/DossiersIncompletsPage';
 import ModificationsAttentePage from './pages/ModificationsAttentePage';
+import ModificationAttenteDetailPage from './pages/ModificationAttenteDetailPage';
 import NotesRecentesPage from './pages/NotesRecentesPage';
 import ElevesListPage from './pages/ElevesListPage';
 import EleveDetailPage from './pages/EleveDetailPage';
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
       {
         path: 'modifications/attente',
         element: <ModificationsAttentePage />,
+      },
+      {
+        path: 'modifications/attente/:id',
+        element: <ModificationAttenteDetailPage />,
       },
       {
         path: 'notes/recentes',

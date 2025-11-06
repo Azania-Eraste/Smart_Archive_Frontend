@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './ListPage.module.css'; 
 import Toast from '../components/ui/Toast';
+import ConfirmModal from '../components/ui/ConfirmModal';
 
 // --- Données factices ---
 // (Simule les dossiers soumis par la Secrétaire)
@@ -24,34 +25,56 @@ const InscriptionsAttentePage: React.FC = () => {
   // Le hook 'navigate' nous permettra de rediriger l'utilisateur
   const navigate = useNavigate();
 
-  // Selection et action
-  const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [action, setAction] = useState<'accept' | 'reject' | 'ask'>("accept");
+  // Selection et action (support multi-select)
+  const [items, setItems] = useState(() => inscriptionsData);
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [action, setAction] = useState<'accept' | 'reject' | 'ask'>('accept');
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [confirmOpen, setConfirmOpen] = useState(false);
 
-  const applyAction = () => {
-    if (!selectedId) {
-      setToastMessage('Veuillez sélectionner une inscription.');
+  const toggleSelect = (id: string) => {
+    setSelectedIds((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
+  };
+
+  const performAction = () => {
+    if (selectedIds.length === 0) {
+      setToastMessage('Veuillez sélectionner au moins une inscription.');
       setTimeout(() => setToastMessage(null), 1500);
       return;
     }
 
-    // Logique temporaire : afficher toast puis (optionnel) redirection
-    let label = '';
-    if (action === 'accept') label = 'Acceptée';
-    if (action === 'reject') label = 'Rejetée';
-    if (action === 'ask') label = 'Demande d\'informations envoyée';
+    setIsLoading(true);
+    // Simulate API call
+    setTimeout(() => {
+      // For demo: remove processed items from the list
+      setItems((prev) => prev.filter((it) => !selectedIds.includes(it.id)));
+      setToastMessage(
+        `Action appliquée (${action}) sur ${selectedIds.length} inscription(s).`
+      );
+      setSelectedIds([]);
+      setIsLoading(false);
+      setTimeout(() => setToastMessage(null), 1500);
+    }, 1200);
+  };
 
-    setToastMessage(`Inscription ${label} (${selectedId})`);
-    setTimeout(() => setToastMessage(null), 1200);
+  const applyAction = () => {
+    if (action === 'reject') {
+      // Show confirmation modal
+      setConfirmOpen(true);
+      return;
+    }
+    performAction();
+  };
 
-    // Optionnel : rediriger vers la page de détail
-    // navigate(`/app/inscriptions/attente/${selectedId}`);
+  const confirmReject = () => {
+    setConfirmOpen(false);
+    performAction();
   };
 
   return (
     <div className={styles.pageContainer}>
-      <h1 className={styles.pageHeader}>Inscriptions en attente ({inscriptionsData.length})</h1>
+  <h1 className={styles.pageHeader}>Inscriptions en attente ({items.length})</h1>
 
       {/* Barre d'actions : select + appliquer */}
       <div className={styles.actionBar}>
@@ -72,17 +95,17 @@ const InscriptionsAttentePage: React.FC = () => {
       </div>
 
       <div className={styles.listContainer}>
-        {inscriptionsData.map((item) => (
+        {items.map((item) => (
           <div key={item.id} className={styles.item}>
-            {/* Radio pour sélectionner l'élément */}
+            {/* Checkbox pour sélection multiple */}
             <div className={styles.radioWrap}>
               <input
-                type="radio"
+                type="checkbox"
                 name="selectedInscription"
                 id={`ins-${item.id}`}
-                checked={selectedId === item.id}
-                onChange={() => setSelectedId(item.id)}
-                className={styles.radio}
+                checked={selectedIds.includes(item.id)}
+                onChange={() => toggleSelect(item.id)}
+                className={styles.checkbox}
               />
             </div>
 
@@ -112,7 +135,21 @@ const InscriptionsAttentePage: React.FC = () => {
         ))}
       </div>
 
+      <div style={{ marginTop: 12 }}>
+        <button className={styles.applyButton} onClick={applyAction} disabled={isLoading}>
+          {isLoading ? 'Traitement...' : 'Appliquer'}
+        </button>
+      </div>
+
       {toastMessage && <Toast message={toastMessage} type="success" />}
+
+      <ConfirmModal
+        isOpen={confirmOpen}
+        title="Confirmer le rejet"
+        message={`Êtes-vous sûr(e) de vouloir rejeter ${selectedIds.length} inscription(s) ?`}
+        onConfirm={confirmReject}
+        onCancel={() => setConfirmOpen(false)}
+      />
     </div>
   );
 };

@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 const widgetData = [
   { 
     title: 'Dossiers Incomplets', 
-    value: '4', 
+    value: '3', 
     color: '#ef4444', // Rouge
     path: '/app/dossiers/incomplets' // Nouvelle route
   },
@@ -21,13 +21,13 @@ const widgetData = [
   },
   { 
     title: 'Modification à approuver', 
-    value: '0', 
+    value: '1', 
     color: '#4f46e5', // Violet
     path: '/app/modifications/attente' // Nouvelle route
   },
   { 
     title: 'Nouvelle note', 
-    value: '12', 
+    value: '4', 
     color: '#22c55e', // Vert
     path: '/app/notes/recentes' // Nouvelle route
   },
