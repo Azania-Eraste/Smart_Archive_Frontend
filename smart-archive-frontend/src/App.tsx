@@ -23,7 +23,7 @@ import NotesRecentesPage from './pages/NotesRecentesPage';
 import ElevesListPage from './pages/ElevesListPage';
 import EleveDetailPage from './pages/EleveDetailPage';
 import EleveDossierPage from './pages/EleveDossierPage';
-
+import InscriptionPage from './pages/InscriptionPage'; // <-- CET IMPORT MANQUAIT
 
 const router = createBrowserRouter([
   {
@@ -34,7 +34,6 @@ const router = createBrowserRouter([
       { index: true, element: <Navigate to="/login" replace /> },
       { path: 'login', element: <LoginPage /> },
       { path: 'forgot-password', element: <ForgotPasswordPage /> },
-     
     ],
   },
   {
@@ -50,23 +49,23 @@ const router = createBrowserRouter([
         path: 'dashboard',
         element: <DashboardEducateurPage />,
       },
-      
+
       // --- AJOUT DES NOUVELLES ROUTES DU DASHBOARD ---
       {
         path: 'dossiers/incomplets',
-        element: <DossiersIncompletsPage />, // (À décommenter)
+        element: <DossiersIncompletsPage />,
       },
       {
         path: 'inscriptions/attente',
-        element: <InscriptionsAttentePage />, // (À décommenter)
+        element: <InscriptionsAttentePage />,
       },
       {
         path: 'modifications/attente',
-        element: <ModificationsAttentePage />, // (À décommenter)
+        element: <ModificationsAttentePage />,
       },
       {
         path: 'notes/recentes',
-        element: <NotesRecentesPage />, // (À décommenter)
+        element: <NotesRecentesPage />,
       },
       {
         path: 'eleves',
@@ -80,12 +79,12 @@ const router = createBrowserRouter([
         path: 'eleves/:id/dossier/:annee',
         element: <EleveDossierPage />,
       },
-
-      // --- AUTRES ROUTES PRINCIPALES ---
-      // {
-      //   path: 'eleves',
-      //   element: <ElevesListPage />,
-      // },
+      
+      // --- ROUTE D'INSCRIPTION (MANQUANTE) ---
+      {
+        path: 'inscription', // <-- CETTE ROUTE MANQUAIT
+        element: <InscriptionPage />,
+      },
     ],
   },
 ]);

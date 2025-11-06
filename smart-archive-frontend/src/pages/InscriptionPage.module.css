@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  padding-bottom: 80px; /* Espace pour la BottomNav */
+  padding-bottom: 80px;
 }
 
 .pageHeader {
@@ -46,7 +46,63 @@
   background-color: white;
 }
 
-/* Bouton "Prendre une photo" */
+/* --- NOUVEAUX STYLES --- */
+
+/* Zone d'upload pour les documents */
+.uploadArea {
+  border: 2px dashed #d1d5db;
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  background-color: #f9fafb;
+  color: #6b7280;
+  cursor: pointer;
+}
+
+/* Liste des fichiers uploadés */
+.fileList {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+/* Groupe de boutons de navigation (Précédent / Suivant) */
+.navigationButtons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+}
+
+.navButton {
+  padding: 0.75rem 1.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background-color: white;
+  color: #374151;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.nextButton {
+  background-color: #4f46e5; /* Violet */
+  color: white;
+  border: none;
+}
+
+/* Bouton "Inscrire" (Maintenant "Soumettre") */
+.submitButton {
+  padding: 0.85rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #374151; /* Noir/Gris foncé */
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* Bouton photo (inchangé) */
 .iconButton {
   display: flex;
   align-items: center;
@@ -55,35 +111,13 @@
   padding: 0.75rem;
   border: none;
   border-radius: 8px;
-  background-color: #374151; /* Noir/Gris foncé */
+  background-color: #374151;
   color: white;
   font-weight: 500;
   font-size: 0.9rem;
   cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.iconButton:hover {
-  background-color: #1f2937;
 }
 
 .icon {
   font-size: 1.25rem;
-}
-
-/* Bouton "Inscrire" */
-.submitButton {
-  padding: 0.85rem;
-  border: none;
-  border-radius: 8px;
-  background-color: #374151; /* Couleur de la maquette */
-  color: white;
-  font-weight: 600;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.submitButton:hover {
-  background-color: #1f2937;
 }
