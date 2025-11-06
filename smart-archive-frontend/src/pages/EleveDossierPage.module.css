@@ -65,3 +65,80 @@
   color: #111827;
   margin-top: 1rem;
 }
+
+/* ... (Tous vos styles mobiles existants : .header, .addButton, etc.) ... */
+
+/* --- TABLEAU DESKTOP (Caché par défaut) --- */
+.desktopTableContainer {
+  display: none; /* CACHÉ sur mobile */
+  margin-top: 1rem;
+  width: 100%;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.table th {
+  background-color: #f9fafb;
+  color: #6b7280;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+.table td {
+  color: #374151;
+}
+
+.tableRow:hover {
+  background-color: #f9fafb;
+  cursor: pointer;
+}
+
+/* Style pour l'icône de document */
+.docIcon {
+  font-size: 1.5rem;
+  color: #4f46e5;
+}
+
+/* --- MEDIA QUERY (Responsive) --- */
+
+@media (min-width: 1024px) {
+  /* Sur les ordinateurs... */
+
+  /* 1. On AFFICHE le tableau desktop */
+  .desktopTableContainer {
+    display: block;
+  }
+
+  /* 2. On CACHE la liste mobile (qui est dans ListPage.module.css) */
+  /* On cible le conteneur de la section pour le cacher */
+  .mobileListSection {
+    display: none;
+  }
+
+  /* 3. On ajuste le bouton "Ajouter" */
+  .addButton {
+    width: auto; /* Ne prend plus toute la largeur */
+    align-self: flex-end; /* Se place à droite */
+  }
+
+  /* 4. On aligne le header et le bouton */
+  .headerActions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

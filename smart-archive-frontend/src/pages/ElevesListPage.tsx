@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './ElevesListPage.module.css';
 
-// --- Données factices ---
+// ... (Données factices inchangées) ...
 const classesData = ['3eme A', '3eme B', '3eme C', '3eme D', '3eme E'];
-
 const elevesData = [
   { id: 'eleve-001', name: 'Lamine Yamal', class: '3eme C' },
   { id: 'eleve-002', name: 'Pau Cubarsi', class: '3eme C' },
@@ -17,28 +16,27 @@ const ElevesListPage: React.FC = () => {
   const [selectedClass, setSelectedClass] = useState('3eme C');
   const navigate = useNavigate();
 
-  // Logique pour filtrer les élèves
   const filteredEleves = elevesData.filter(
     (eleve) => eleve.class === selectedClass
   );
 
   const handleEleveClick = (eleveId: string) => {
-    // Redirige vers la page de détail (Écran 2)
     navigate(`/app/eleves/${eleveId}`);
   };
 
   return (
     <div className={styles.pageContainer}>
-      <h1 className={styles.pageHeader}>Élèves</h1>
+      {/* 1. Header (remanié pour le style desktop) */}
+      <div className={styles.headerContainer}>
+        <h1 className={styles.pageHeader}>Élèves</h1>
+        <input
+          type="text"
+          placeholder="Rechercher un élève..."
+          className={styles.searchBar}
+        />
+      </div>
 
-      {/* Barre de recherche */}
-      <input
-        type="text"
-        placeholder="Rechercher un élève..."
-        className={styles.searchBar}
-      />
-
-      {/* Filtre par onglets de classe */}
+      {/* 2. Filtre par onglets (inchangé) */}
       <div className={styles.tabsContainer}>
         {classesData.map((classe) => (
           <button
@@ -53,7 +51,9 @@ const ElevesListPage: React.FC = () => {
         ))}
       </div>
 
-      {/* Liste des élèves filtrée */}
+      {/* 3. VUE LISTE (pour Mobile)
+          Sera cachée sur desktop par le CSS
+      */}
       <div className={styles.listContainer}>
         {filteredEleves.map((item) => (
           <div
@@ -70,6 +70,40 @@ const ElevesListPage: React.FC = () => {
             <span>&gt;</span>
           </div>
         ))}
+      </div>
+
+      {/* 4. VUE TABLEAU (pour Desktop)
+          Sera cachée sur mobile par le CSS
+      */}
+      <div className={styles.desktopTableContainer}>
+        <table className={styles.table}>
+          <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Classe</th>
+              {/* Ajoutez d'autres colonnes ici (ex: Matricule) */}
+            </tr>
+          </thead>
+          <tbody>
+            {filteredEleves.map((item) => (
+              <tr
+                key={item.id}
+                className={styles.tableRow}
+                onClick={() => handleEleveClick(item.id)}
+              >
+                <td>
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <div className={styles.tableAvatar}>
+                      {item.name.charAt(0)}
+                    </div>
+                    <span>{item.name}</span>
+                  </div>
+                </td>
+                <td>{item.class}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );

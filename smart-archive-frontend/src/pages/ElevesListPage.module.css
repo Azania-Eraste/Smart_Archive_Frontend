@@ -105,3 +105,85 @@
   font-size: 0.9rem;
   color: #6b7280;
 }
+
+/* ... (Tous vos styles mobiles existants) ... */
+
+/* --- TABLEAU DESKTOP (Caché par défaut) --- */
+.desktopTableContainer {
+  display: none; /* CACHÉ sur mobile */
+  margin-top: 1rem;
+  width: 100%;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  overflow: hidden; /* Pour les coins arrondis */
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.table th {
+  background-color: #f9fafb;
+  color: #6b7280;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+.table td {
+  color: #374151;
+}
+
+/* Style pour l'avatar dans le tableau */
+.tableAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #e0e7ff;
+  color: #4f46e5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  margin-right: 0.75rem;
+}
+
+.tableRow:hover {
+  background-color: #f9fafb;
+  cursor: pointer;
+}
+
+/* --- MEDIA QUERY (La magie responsive) --- */
+
+@media (min-width: 1024px) {
+  /* Sur les ordinateurs... */
+
+  /* 1. On CACHE la liste mobile */
+  .listContainer {
+    display: none;
+  }
+
+  /* 2. On AFFICHE le tableau desktop */
+  .desktopTableContainer {
+    display: block;
+  }
+
+  /* 3. On améliore la recherche et les onglets */
+  .headerContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .searchBar {
+    width: 300px; /* Ne prend plus toute la largeur */
+  }
+}

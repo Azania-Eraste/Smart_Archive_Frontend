@@ -93,6 +93,55 @@
   margin-top: 1rem;
 }
 
+/* ... (Tous vos styles mobiles existants : .pageContainer, .header, .infoSection, etc.) ... */
+
+/* --- NOUVEAUX STYLES --- */
+
+/* Ce conteneur va gérer la disposition de nos 2 colonnes */
+.contentGrid {
+  /* Sur mobile, reste en colonne simple */
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* On s'assure que la section historique a le bon espacement */
+.historySection {
+  margin-top: 1rem;
+}
+
+.historyHeader {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 1rem; /* Ajout d'un espace avant la liste */
+}
+
+
+/* --- MEDIA QUERY (La magie responsive) --- */
+
+@media (min-width: 1024px) {
+  /* Sur les ordinateurs... */
+  
+  .contentGrid {
+    /* On passe en GRILLE */
+    display: grid;
+    /* 40% pour la colonne info, le reste (1fr) pour la liste */
+    grid-template-columns: 40% 1fr;
+    gap: 2rem;
+    align-items: flex-start; /* Aligne les 2 blocs en haut */
+  }
+
+  .historySection {
+    margin-top: 0; /* Plus besoin de marge en haut */
+  }
+
+  /* Ajustement mineur pour que le titre de la liste soit aligné */
+  .historyHeader {
+    margin-top: 0;
+  }
+}
+
 /* Nous réutilisons les styles de ListPage.module.css
    Assurez-vous que ListPage.module.css existe !
 */
