@@ -56,6 +56,69 @@
   margin-bottom: 1rem;
 }
 
+/* Boutons d'action (Scanner + Parcourir) */
+.actionButtons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.scanButton,
+.uploadButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1.5rem 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  background-color: white;
+  cursor: pointer;
+  font-weight: 500;
+  color: #374151;
+  transition: all 0.2s;
+}
+
+.scanButton:hover,
+.uploadButton:hover {
+  border-color: #3b82f6;
+  background-color: #eff6ff;
+  color: #1e40af;
+}
+
+.scanButton:active,
+.uploadButton:active {
+  transform: scale(0.98);
+}
+
+/* Liste des fichiers */
+.fileList {
+  background-color: #f9fafb;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.fileList h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.9rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.fileItem {
+  background-color: white;
+  padding: 0.75rem;
+  border-radius: 6px;
+  border-left: 3px solid #3b82f6;
+  color: #1f2937;
+  font-size: 0.9rem;
+  word-break: break-all;
+  margin-bottom: 0.5rem;
+}
+
 /* Groupe de formulaire (pour le menu déroulant) */
 .formGroup {
   margin-bottom: 1.5rem;
@@ -89,4 +152,17 @@
   font-weight: 600;
   font-size: 1rem;
   cursor: pointer;
+  transition: all 0.2s;
+}
+
+.submitButton:hover:not(:disabled) {
+  background-color: #4338ca;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+
+.submitButton:disabled {
+  background-color: #d1d5db;
+  cursor: not-allowed;
+  opacity: 0.6;
 }

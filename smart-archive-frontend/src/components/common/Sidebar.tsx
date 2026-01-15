@@ -19,16 +19,16 @@ type NavItem = {
   icon: React.ReactNode;
 };
 
-// 1. Définir les liens pour le Professeur
+// 1. Définir les liens pour chaque rôle
 const educateurNavItems: NavItem[] = [
-  { path: '/app/dashboardEdu', label: 'Dashboard', icon: <MdSpaceDashboard /> },
+  { path: '/app/dashboard', label: 'Dashboard', icon: <MdSpaceDashboard /> },
   { path: '/app/inscription', label: '+ Inscription', icon: <MdPersonAdd /> },
   { path: '/app/eleves', label: 'Élèves', icon: <MdGroup /> },
   { path: '/app/historique', label: 'Historique', icon: <MdHistory /> },
 ];
 
 const secretaireNavItems: NavItem[] = [
-  { path: '/app/dashboardSec', label: 'Dashboard', icon: <MdSpaceDashboard /> },
+  { path: '/app/dashboard', label: 'Dashboard', icon: <MdSpaceDashboard /> },
   { path: '/app/inscription', label: '+ Inscription', icon: <MdPersonAdd /> },
   { path: '/app/matieres', label: 'Matières', icon: <MdBook /> },
   { path: '/app/eleves', label: 'Recherche Élèves', icon: <MdSearch /> },
@@ -39,21 +39,53 @@ const professeurNavItems: NavItem[] = [
   { path: '/app/settings', label: 'Paramètres', icon: <MdSettings /> },
 ];
 
-const Sidebar: React.FC = () => {
-  const { role } = useAuth();
+const parentNavItems: NavItem[] = [
+  { path: '/app/dashboard', label: 'Dashboard', icon: <MdSpaceDashboard /> },
+  { path: '/app/eleves', label: 'Mes Enfants', icon: <MdGroup /> },
+  { path: '/app/historique', label: 'Historique', icon: <MdHistory /> },
+];
 
-  // 2. Ajouter la nouvelle logique
+const adminNavItems: NavItem[] = [
+  { path: '/app/dashboard', label: 'Dashboard', icon: <MdSpaceDashboard /> },
+  { path: '/app/inscription', label: '+ Inscription', icon: <MdPersonAdd /> },
+  { path: '/app/matieres', label: 'Matières', icon: <MdBook /> },
+  { path: '/app/eleves', label: 'Recherche Élèves', icon: <MdSearch /> },
+];
+
+const Sidebar: React.FC = () => {
+  const { user } = useAuth();
+  const role = user?.role;
+
+  // Normaliser le rôle en title case pour la comparaison
+  const normalizedRole = role 
+    ? role.charAt(0).toUpperCase() + role.slice(1).toLowerCase()
+    : null;
+
+  // Sélectionner les items en fonction du rôle
   let navItems: NavItem[] = [];
-  if (role === 'Educateur') {
-    navItems = educateurNavItems;
-  } else if (role === 'Secretaire') {
-    navItems = secretaireNavItems;
-  } else if (role === 'Professeur') { // <-- 3. Ajouter la condition
-    navItems = professeurNavItems;
+  switch (normalizedRole) {
+    case 'Educateur':
+      navItems = educateurNavItems;
+      break;
+    case 'Secretaire':
+      navItems = secretaireNavItems;
+      break;
+    case 'Professeur':
+      navItems = professeurNavItems;
+      break;
+    case 'Parent':
+      navItems = parentNavItems;
+      break;
+    case 'Admin':
+    case 'Directeur':
+      navItems = adminNavItems;
+      break;
+    default:
+      navItems = [];
   }
 
-  if (!role) {
-    return <aside className={styles.sidebar}>...</aside>; 
+  if (!user) {
+    return <aside className={styles.sidebar}>Chargement...</aside>; 
   }
 
   // ... (le reste du JSX est inchangé)
@@ -61,7 +93,10 @@ const Sidebar: React.FC = () => {
     <aside className={styles.sidebar}>
       <div className={styles.sidebarHeader}>
         <h2>Smart Archive</h2>
-        <span style={{color: '#9ca3af', fontSize: '0.9rem'}}>{role}</span>
+        <div style={{color: '#9ca3af', fontSize: '0.85rem', marginTop: '0.5rem'}}>
+          <p style={{margin: '0.25rem 0'}}>{user.prenom} {user.nom}</p>
+          <p style={{margin: '0.25rem 0'}}><strong>{normalizedRole || 'Unknown'}</strong></p>
+        </div>
       </div>
       <nav className={styles.sidebarNav}>
         <ul>

@@ -8,32 +8,28 @@ import {
 // --- Imports de vos Layouts et Pages ---
 import AuthLayout from './layouts/AuthLayout';
 import DashboardLayout from './layouts/DashboardLayout';
-import LoginPage from './pages/LoginPage';
-import ForgotPasswordPage from './pages/ForgotPasswordPage';
+import LoginPage from './pages/login/LoginPage';
+import ForgotPasswordPage from './pages/forgetPassword/ForgotPasswordPage';
 
 // --- L'AIGUILLEUR DE DASHBOARD ---
-import DashboardRouter from './pages/DashboardRouter';
-// (Imports pour l'aiguilleur)
-import DashboardEducateurPage from './pages/DashboardEducateurPage';
-import DashboardSecretairePage from './pages/DashboardSecretairePage';
-import DashboardProfesseurPage from './pages/DashboardProfesseurPage';
+import DashboardRouter from './pages/Dashboard/DashboardRouter';
 
 // --- Imports des Pages Fonctionnelles ---
-import InscriptionsAttentePage from './pages/InscriptionsAttentePage';
+import InscriptionsAttentePage from './pages/Inscription/InscriptionsAttentePage';
 import DossiersIncompletsPage from './pages/DossiersIncompletsPage';
-import ModificationsAttentePage from './pages/ModificationsAttentePage';
-import ModificationAttenteDetailPage from './pages/ModificationAttenteDetailPage';
-import NotesRecentesPage from './pages/NotesRecentesPage';
-import ElevesListPage from './pages/ElevesListPage';
-import EleveDetailPage from './pages/EleveDetailPage';
-import EleveDossierPage from './pages/EleveDossierPage';
-import InscriptionPage from './pages/InscriptionPage';
+import ModificationsAttentePage from './pages/Modification/ModificationsAttentePage';
+import ModificationAttenteDetailPage from './pages/Modification/ModificationAttenteDetailPage';
+import NotesRecentesPage from './pages/Notes/NotesRecentesPage';
+import ElevesListPage from './pages/Eleve/List/ElevesListPage';
+import EleveDetailPage from './pages/Eleve/Detail/EleveDetailPage';
+import EleveDossierPage from './pages/Eleve/Dossier/EleveDossierPage';
+import InscriptionPage from './pages/Inscription/InscriptionPage';
 import HistoriquePage from './pages/HistoriquePage';
-import GestionMatieresPage from './pages/GestionMatieresPage';
+import GestionMatieresPage from './pages/Gestion/GestionMatieresPage';
 
 // --- Imports des Pages Professeur ---
-import GestionClassePage from './pages/GestionClassePage';
-import SaisieNotesPage from './pages/SaisieNotesPage'; // <-- 1. IMPORTER LA PAGE
+import GestionClassePage from './pages/Gestion/GestionClassePage';
+import SaisieNotesPage from './pages/Notes/SaisieNotesPage'; // <-- 1. IMPORTER LA PAGE
 
 const router = createBrowserRouter([
   {
@@ -45,6 +41,11 @@ const router = createBrowserRouter([
       { path: 'login', element: <LoginPage /> },
       { path: 'forgot-password', element: <ForgotPasswordPage /> },
     ],
+  },
+  {
+    // Redirection directe si quelqu'un tape /dashboard
+    path: '/dashboard',
+    element: <Navigate to="/app/dashboard" replace />,
   },
   {
     // === Routes Principales de l'App (Protégées) ===

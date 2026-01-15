@@ -1,23 +1,86 @@
 import React, { useState } from 'react';
 import styles from './ImportDocumentModal.module.css';
-import { MdClose } from 'react-icons/md';
+import { MdClose, MdCamera } from 'react-icons/md';
+import DocumentScanner from '../ui/DocumentScanner';
+import type { DocumentType } from '../../shared/services/dossiersService';
+import type { AnneeScolaire } from '../../shared/services/etablissementService';
 
 // 1. Définir les "props" que ce composant accepte
-// Il a besoin de savoir s'il doit s'afficher (isOpen)
-// et d'une fonction pour dire au parent de le fermer (onClose)
 type Props = {
   isOpen: boolean;
   onClose: () => void;
+  // onSave is called for each file: (file, titre, type, anneeId?)
+  onSave?: (file: File, titre: string, type: DocumentType, anneeId?: number) => Promise<void>;
+  isLoading?: boolean;
+  availableYears?: AnneeScolaire[];
 };
 
-const ImportDocumentModal: React.FC<Props> = ({ isOpen, onClose }) => {
+const ImportDocumentModal: React.FC<Props> = ({ isOpen, onClose, onSave, isLoading, availableYears }) => {
   const [docType, setDocType] = useState('');
+  const [showScanner, setShowScanner] = useState(false);
+  const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
+  const [title, setTitle] = useState<string>('');
+  const [selectedYear, setSelectedYear] = useState<number | ''>('');
+
+  const handleScannerUpload = async (files: File[]) => {
+    // Ajouter les fichiers scannés à la liste
+    setUploadedFiles((prev) => [...prev, ...files]);
+    setShowScanner(false);
+  };
+
+  const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || []);
+    setUploadedFiles((prev) => [...prev, ...files]);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Importation avec le type:', docType);
-    // TODO: Logique d'upload du fichier
-    onClose(); // Fermer le modal après l'import
+    
+    if (!docType) {
+      alert('Veuillez sélectionner un type de document');
+      return;
+    }
+
+    if (uploadedFiles.length === 0) {
+      alert('Veuillez ajouter au moins un document');
+      return;
+    }
+
+    console.log('Importation:', {
+      type: docType,
+      files: uploadedFiles.map(f => f.name),
+    });
+    
+    // If parent provided onSave, call it for each file
+    const mapType = (t: string): DocumentType => {
+      switch (t) {
+        case 'acte_naissance': return 'ACTE_NAISSANCE';
+        case 'bulletin': return 'AUTRE';
+        case 'fiche_medicale': return 'AUTRE';
+        default: return 'AUTRE';
+      }
+    };
+
+    (async () => {
+      try {
+        if (onSave) {
+          for (const file of uploadedFiles) {
+            await onSave(file, title || file.name, mapType(docType), selectedYear === '' ? undefined : Number(selectedYear));
+          }
+        } else {
+          console.warn('ImportDocumentModal: onSave not provided; files not uploaded');
+        }
+        // reset and close
+        setUploadedFiles([]);
+        setDocType('');
+        setTitle('');
+        setSelectedYear('');
+        onClose();
+      } catch (err) {
+        console.error('Erreur lors de l\'upload des fichiers', err);
+        alert('Erreur lors de l\'upload des fichiers');
+      }
+    })();
   };
 
   // 2. Si 'isOpen' est faux, ne rien afficher
@@ -25,9 +88,13 @@ const ImportDocumentModal: React.FC<Props> = ({ isOpen, onClose }) => {
     return null;
   }
 
+  // Afficher le scanner si activé
+  if (showScanner) {
+    return <DocumentScanner onUpload={handleScannerUpload} onClose={() => setShowScanner(false)} />;
+  }
+
   // 3. Si 'isOpen' est vrai, afficher le modal
   return (
-    // 'stopPropagation' empêche de fermer le modal si on clique DANS la boîte
     <div className={styles.overlay} onClick={onClose}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <div className={styles.header}>
@@ -38,13 +105,56 @@ const ImportDocumentModal: React.FC<Props> = ({ isOpen, onClose }) => {
         </div>
 
         <form onSubmit={handleSubmit}>
-          {/* Zone d'upload (Maquette "Frame 1") */}
-          <div className={styles.uploadArea}>
-            <p>Glissez-déposez un fichier ou cliquez pour le sélectionner</p>
-            {/* Un vrai <input type="file" /> serait caché ici */}
+          {/* Zone d'upload ou boutons d'action */}
+          <div className={styles.actionButtons}>
+            <button
+              type="button"
+              className={styles.scanButton}
+              onClick={() => setShowScanner(true)}
+            >
+              <MdCamera size={24} />
+              <span>Scanner un document</span>
+            </button>
+            <label className={styles.uploadButton}>
+              <input
+                type="file"
+                multiple
+                accept="image/*,.pdf"
+                onChange={handleFileInput}
+                style={{ display: 'none' }}
+              />
+              <span>📁 Parcourir les fichiers</span>
+            </label>
           </div>
 
-          {/* Menu déroulant (Maquette "Frame 1") */}
+          {/* Afficher les fichiers ajoutés */}
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Titre (optionnel)</label>
+            <input className={styles.input} value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Titre pour le document (ou laisser vide)" />
+          </div>
+          {availableYears && availableYears.length > 0 && (
+            <div className={styles.formGroup}>
+              <label className={styles.label}>Année scolaire (optionnel)</label>
+              <select className={styles.select} value={selectedYear} onChange={(e) => setSelectedYear(e.target.value ? Number(e.target.value) : '')}>
+                <option value="">Laisser vide (utiliser l'année selectionnée sur la page)</option>
+                {availableYears.map((a) => (
+                  <option key={a.id} value={a.id}>{a.libelle}</option>
+                ))}
+              </select>
+            </div>
+          )}
+          {uploadedFiles.length > 0 && (
+            <div className={styles.fileList}>
+              <h4>Fichiers sélectionnés ({uploadedFiles.length})</h4>
+              {uploadedFiles.map((file, idx) => (
+                <div key={idx} className={styles.fileItem}>
+                  {file.name}
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Menu déroulant */}
           <div className={styles.formGroup}>
             <label htmlFor="docType" className={styles.label}>
               Type de document
@@ -64,8 +174,12 @@ const ImportDocumentModal: React.FC<Props> = ({ isOpen, onClose }) => {
             </select>
           </div>
 
-          <button type="submit" className={styles.submitButton}>
-            Importer
+          <button 
+            type="submit" 
+            className={styles.submitButton}
+            disabled={uploadedFiles.length === 0 || !!isLoading}
+          >
+            {isLoading ? 'Importation...' : 'Importer'}
           </button>
         </form>
       </div>
